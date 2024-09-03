@@ -1,0 +1,37 @@
+{
+    "sEmptyTable": "Nincs rendelkezésre álló adat",
+    "sInfo": "_START_ - _END_ / _TOTAL_ összes",
+    "sInfoEmpty": "0 - 0 / 0 összes",
+    "sInfoFiltered": "(összes _MAX_ közül szűrve)",
+    "sInfoPostFix": "",
+    "sInfoThousands": " ",
+    "sLengthMenu": "Mutat: _MENU_",
+    "sLoadingRecords": "Betöltés...",
+    "sProcessing": "Feldolgozás...",
+    "sSearch": "Keresés:",
+    "sZeroRecords": "Nincs a keresésnek megfelelő találat",
+    "oPaginate": {
+        "sFirst": "Első",
+        "sLast": "Utolsó",
+        "sNext": "Következő",
+        "sPrevious": "Előző"
+    },
+    "oAria": {
+        "sSortAscending": ": aktiválja a növekvő rendezéshez",
+        "sSortDescending": ": aktiválja a csökkenő rendezéshez"
+    },
+    "select": {
+        "rows": {
+            "_": "%d sor kiválasztva",
+            "0": "",
+            "1": "1 sor kiválasztva"
+        }
+    },
+    "buttons": {
+        "copy": "Másolás",
+        "colvis": "Oszlop láthatóság",
+        "excel": "Excel",
+        "pdf": "PDF",
+        "print": "Nyomtatás"
+    }
+}
