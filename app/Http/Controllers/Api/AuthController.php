@@ -4,36 +4,114 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function register(Request $request)
     {
         //Validate Request
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required'
+        $this->validate($request,[
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
         ]);
 
         try {
 
-            if(Auth::attempt($request->only('email','password'))) {
-                $user = Auth::user();
-                $token = $user->createToken('auth token')->plainTextToken;
+            // Create a new user
+            $user = User::create([
+                'role_id' => 2,
+                'name' => $request->name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            //Generate Token
+            $token = $user->createToken('myToken')->plainTextToken;
+
+            return response()->json([
+                'status' => 201,
+                'message' => 'Register Successfully',
+                'data' => $user,
+                'token' => $token,
+            ], 201);
+
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage().' on line '.$e->getLine().' in file '.$e->getFile()], 500);
+        }
+    }
+
+    public function login(Request $request)
+    {
+        //Validate Request
+        $this->validate($request,[
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        try {
+
+            $user = User::where('email', $request->email)->first();
+            if($user) {
+                if (!Hash::check($request->password, $user->password)) {
+                    return response()->json([
+                        'status' => 422,
+                        'message' => 'Password did not match!'
+                    ], 422);
+                }
+                //Generate Token
+                $token = $user->createToken('myToken')->plainTextToken;
 
                 return response()->json([
                     'status' => 200,
                     'message' => 'Login Successfully',
-                    'user' => $user,
-                    'token' => $token
-                ],200);
+                    'data' => $user,
+                    'token' => $token,
+                ], 200);
             }
 
             return response()->json([
                 'status' => 422,
-                'message' => 'Invalid Credentials',
-            ],422);
+                'message' => 'Email Not Found'
+            ], 422);
 
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage() . ' on line ' . $e->getLine() . ' in file ' . $e->getFile()], 500);
+        }
+    }
+
+    public function getUser()
+    {
+        try {
+
+            $user = Auth::user();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $user
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage() . ' on line ' . $e->getLine() . ' in file ' . $e->getFile()], 500);
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        try {
+
+            $request->user()->currentAccessToken()->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully logged out',
+                'data' => []
+            ], 200);
+            
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage() . ' on line ' . $e->getLine() . ' in file ' . $e->getFile()], 500);
         }
