@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Role;
 
 class AuthController extends Controller
 {
@@ -29,6 +30,11 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
+
+            $role = Role::find(2);
+            if($role) {
+                $user->roles()->attach($role->id);
+            }
 
             //Generate Token
             $token = $user->createToken('myToken')->plainTextToken;

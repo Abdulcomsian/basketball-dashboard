@@ -17,6 +17,9 @@ trait Loggable
 
     protected function logActivity($action)
     {
+        $user = auth()->user();
+        $userName = $user ? $user->name : 'Unknown User';
+
         $logData = [
             'action' => $action,
             'model' => class_basename(static::class),
@@ -24,7 +27,7 @@ trait Loggable
             'user_id' => auth()->id(),
             'related_id' => $this->related_id ?? null,
             'related_model' => $this->related_model ?? null,
-            'description' => auth()->user()->name . ' ' . $action . ' ' . class_basename(static::class) . ' successfully.',
+            'description' => $userName . ' ' . $action . ' ' . class_basename(static::class) . ' successfully.',
         ];
 
         if ($action === 'updated') {
