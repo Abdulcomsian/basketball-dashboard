@@ -4,14 +4,14 @@
 <head>
     <base href="../../../">
     <meta charset="utf-8" />
-    <title>Basket Ball Training app</title>
+    <title>Basket Ball - @yield('title')</title>
     <meta name="description"
-        content="Basket Ball Training app." />
+        content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
     <meta name="keywords"
         content="Metronic, bootstrap, bootstrap 5, Angular 11, VueJs, React, Laravel, admin themes, web design, figma, web development, ree admin themes, bootstrap admin, bootstrap dashboard" />
     <link rel="canonical" href="Https://preview.keenthemes.com/metronic8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    {{-- <link rel="shortcut icon" href="assets/media/logos/favicon.ico" /> --}}
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -36,6 +36,35 @@
 
     .custom-flex {
         height: 100%;
+    }
+
+    .light-orange {
+        color: #E67E22;
+    }
+
+    .orange-btn {
+        background-color: #D35400;
+        color: #FFFFFF;
+    }
+
+    @media (min-width: 992px) {
+        .w-lg-500px {
+            width: 470px !important;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .w-lg-600px {
+            width: 470px !important;
+        }
+    }
+
+    a:hover {
+        color: #D35400 !important;
+    }
+
+    .content {
+        background-color: #fff !important;
     }
 </style>
 

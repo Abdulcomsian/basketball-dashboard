@@ -13,8 +13,7 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        //Validate Request
-        $this->validate($request,[
+        $this->validate($request, [
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
@@ -22,8 +21,6 @@ class AuthController extends Controller
         ]);
 
         try {
-
-            // Create a new user
             $user = User::create([
                 'name' => $request->name,
                 'username' => $request->username,
@@ -32,11 +29,9 @@ class AuthController extends Controller
             ]);
 
             $role = Role::find(2);
-            if($role) {
+            if ($role) {
                 $user->roles()->attach($role->id);
             }
-
-            //Generate Token
             $token = $user->createToken('myToken')->plainTextToken;
 
             return response()->json([
@@ -45,30 +40,28 @@ class AuthController extends Controller
                 'data' => $user,
                 'token' => $token,
             ], 201);
-
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage().' on line '.$e->getLine().' in file '.$e->getFile()], 500);
+            return response()->json(['message' => $e->getMessage() . ' on line ' . $e->getLine() . ' in file ' . $e->getFile()], 500);
         }
     }
 
     public function login(Request $request)
     {
-        //Validate Request
-        $this->validate($request,[
+        $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
         ]);
         try {
 
             $user = User::where('email', $request->email)->first();
-            if($user) {
+            if ($user) {
                 if (!Hash::check($request->password, $user->password)) {
                     return response()->json([
                         'status' => 422,
                         'message' => 'Password did not match!'
                     ], 422);
                 }
-                //Generate Token
+
                 $token = $user->createToken('myToken')->plainTextToken;
 
                 return response()->json([
@@ -83,7 +76,6 @@ class AuthController extends Controller
                 'status' => 422,
                 'message' => 'Email Not Found'
             ], 422);
-
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage() . ' on line ' . $e->getLine() . ' in file ' . $e->getFile()], 500);
         }
@@ -92,7 +84,6 @@ class AuthController extends Controller
     public function getUser()
     {
         try {
-
             $user = Auth::user();
 
             return response()->json([
@@ -100,7 +91,6 @@ class AuthController extends Controller
                 'message' => 'success',
                 'data' => $user
             ], 200);
-
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage() . ' on line ' . $e->getLine() . ' in file ' . $e->getFile()], 500);
         }
@@ -109,14 +99,11 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         try {
-
             $request->user()->currentAccessToken()->delete();
             return response()->json([
                 'status' => 200,
                 'message' => 'Successfully logged out',
-                'data' => []
             ], 200);
-            
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage() . ' on line ' . $e->getLine() . ' in file ' . $e->getFile()], 500);
         }

@@ -1,13 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\WorkoutController;
 use App\Http\Controllers\Api\LevelController;
 use App\Http\Controllers\Api\SkillController;
 use App\Http\Controllers\Api\VideoController;
-
-// Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:sanctum']], function () {
-// });
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -29,5 +27,4 @@ Route::middleware(['auth:sanctum'])->group(function() {
     //Videos
     Route::get('get/videos', [VideoController::class, 'allVideos']);
     Route::get('get/single/video/{id}', [VideoController::class, 'getSingleVideo']);
-
 });
