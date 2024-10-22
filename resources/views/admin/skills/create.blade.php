@@ -6,13 +6,20 @@
         <div class="col-md-12 mt-5">
             <div class="card mt-5">
                 <div class="card-body">
-                    <form class="form" method="POST" action="{{ route('admin.skills.store') }}">
+                    <form class="form" method="POST" action="{{ route('admin.skills.store') }}" enctype="multipart/form-data">
                         @csrf
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label class="form-label">Name:</label>
-                                        <input type="text" class="form-control" placeholder="name here..." name="name" required />
+                                <label class="form-label">Title:</label>
+                                        <input type="text" class="form-control" placeholder="title here..." name="name" required />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Upload Image:</label>
+                                        <input type="file" class="form-control" placeholder="title here..." name="file" required />
                             </div>
                         </div>
                     </div>

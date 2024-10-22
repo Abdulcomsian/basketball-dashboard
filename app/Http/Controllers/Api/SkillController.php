@@ -14,7 +14,6 @@ class SkillController extends Controller
     public function allSkills()
     {
         try {
-
             $skills = Skill::all();
 
             return response()->json([

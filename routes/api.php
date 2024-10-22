@@ -25,6 +25,6 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('get/skills', [SkillController::class, 'allSkills']);
     Route::get('get/single/skill/{id}', [SkillController::class, 'getSingleSkill']);
     //Videos
-    Route::get('get/videos', [VideoController::class, 'allVideos']);
+    Route::post('get/videos', [VideoController::class, 'allVideos']);
     Route::get('get/single/video/{id}', [VideoController::class, 'getSingleVideo']);
 });

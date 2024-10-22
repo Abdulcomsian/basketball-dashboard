@@ -21,6 +21,7 @@
                             <tr class="text-start text-black-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="min-w-125px">#</th>
                                 <th class="min-w-125px text-center">Title</th>
+                                <th class="min-w-125px text-center">Image</th>
                                 <th class="text-end min-w-100px text-center">Actions</th>
                             </tr>
                         </thead>
@@ -31,7 +32,15 @@
                                     <td class="text-center">
                                         {{ $skill->name }}
                                     </td>
-
+                                    <td class="text-center">
+                                        @if ($skill->file)
+                                        <a class="link" href="{{ asset('storage/' . $skill->file) }}" target="_blank" title="View {{ $skill->name }}">
+                                            View Image
+                                        </a>
+                                        @else
+                                            No Media Available
+                                        @endif
+                                    </td>                                                                      
                                     <td class="text-center">
                                         <a href="{{ route('admin.skills.edit', $skill->id) }}">
                                             <button class="btn btn-sm save-btn">Edit</button>

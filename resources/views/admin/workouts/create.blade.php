@@ -8,23 +8,26 @@
                 <div class="card-body">
                     <form class="form" method="POST" action="{{ route('admin.workouts.store') }}">
                         @csrf
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group mb-3">
-                                <label class="form-label">Name:</label>
-                                        <input type="text" class="form-control" placeholder="name here..." name="name" required />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Time:</label>
+                                    <input type="number" class="form-control" placeholder="time here..." name="name"
+                                        required />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Save and Cancel Buttons -->
-                    <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-sm save-btn">
-                            <i class="far fa-save icon"></i> Save
-                        </button>
-                        <button type="button" class="btn btn-sm delete-btn">
-                            <i class="fa fa-ban icon"></i> Cancel
-                        </button>
-                    </div>
+                        <!-- Save and Cancel Buttons -->
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-sm save-btn">
+                                <i class="far fa-save icon"></i> Save
+                            </button>
+                            <a href="{{ route('admin.workouts.index') }}">
+                                <button type="button" class="btn btn-sm delete-btn">
+                                    <i class="fa fa-ban icon"></i> Cancel
+                                </button>
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>

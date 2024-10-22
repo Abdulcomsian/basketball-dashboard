@@ -30,20 +30,31 @@ class SkillsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'file' => 'required|file|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
         $skill = new Skill;
         $skill->name = $request->name;
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $directory = public_path('uploads/skills');
+
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            $filePath = $file->store('skills', 'public');
+            $skill->file = $filePath;
+        }
+
         $skill->save();
 
         return redirect()->route('admin.skills.index')->with('success', 'Skill Created Successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -60,7 +71,32 @@ class SkillsController extends Controller
     public function update(Request $request, string $id)
     {
         $skill = Skill::find($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'file' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
         $skill->name = $request->name;
+
+        if ($request->hasFile('file')) {
+            if ($skill->file) {
+                $oldFilePath = public_path('storage/' . $skill->file);
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+            }
+
+            $directory = public_path('uploads/skills');
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            $file = $request->file('file');
+            $filePath = $file->store('skills', 'public');
+            $skill->file = $filePath;
+        }
+
         $skill->save();
 
         return redirect()->route('admin.skills.index')->with('success', 'Skill Updated Successfully');

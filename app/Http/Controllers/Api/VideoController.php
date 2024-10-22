@@ -2,51 +2,37 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Models\Video;
+use App\Services\VideoService;
+use App\Http\Controllers\Controller;
 
 class VideoController extends Controller
 {
-    public function allVideos()
+    protected $videoService;
+
+    public function __construct(VideoService $videoService)
+    {
+        $this->videoService = $videoService;
+    }
+    public function allVideos(Request $request)
     {
         try {
-            $videos = Video::with('workout')->get();
-
-            return response()->json([
-                'status' => 200,
-                'message' => 'Videos Found Successfully',
-                'data' => $videos
-            ], 200);
-
+            return $this->videoService->allVideos($request);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage().' on line '.$e->getLine().' in file '.$e->getFile()], 500);
+            return response()->json([
+                'message' => $e->getMessage() . ' on line ' . $e->getLine() . ' in file ' . $e->getFile()
+            ], 500);
         }
     }
 
     public function getSingleVideo($id)
     {
         try {
-
-            $video = Video::where('id', $id)->with('workout')->first();
-            if(!$video) {
-                return response()->json([
-                    'status' => 422,
-                    'message' => 'Video Not Found'
-                ], 422);
-            }
-            
-            return response()->json([
-                'status' => 200,
-                'message' => 'Video Found Successfully',
-                'data' => $video
-            ], 200);
-
+            return $this->videoService->getSingleVideo($id);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage().' on line '.$e->getLine().' in file '.$e->getFile()], 500);
+            return response()->json([
+                'message' => $e->getMessage() . ' on line ' . $e->getLine() . ' in file ' . $e->getFile()
+            ], 500);
         }
     }
 }

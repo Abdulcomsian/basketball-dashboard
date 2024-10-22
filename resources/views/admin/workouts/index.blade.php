@@ -30,7 +30,7 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td class="text-center">
                                         {{-- Optional profile image --}}
-                                        {{$workout->name}}
+                                        {{$workout->name}} Minutes
                                     </td>
 
                                     <td class="text-center">

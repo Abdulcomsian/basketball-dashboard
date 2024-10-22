@@ -6,7 +6,7 @@
         <div class="col-md-12 mt-5">
             <div class="card mt-5">
                 <div class="card-body">
-                    <form class="form" method="POST" action="{{ route('admin.videos.store') }}">
+                    <form class="form" method="POST" action="{{ route('admin.videos.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">

@@ -12,7 +12,6 @@
         content="Metronic, bootstrap, bootstrap 5, Angular 11, VueJs, React, Laravel, admin themes, web design, figma, web development, ree admin themes, bootstrap admin, bootstrap dashboard" />
     <link rel="canonical" href="Https://preview.keenthemes.com/metronic8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {{-- <link rel="shortcut icon" href="assets/media/logos/favicon.ico" /> --}}
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -148,7 +147,6 @@
     .nav-tabs .nav-link.active {
         color: #7F8C8D !important;
         background-color: #F0F0F0 !important;
-        /* border-color: #dee2e6 #dee2e6 #fff; */
     }
 </style>
 

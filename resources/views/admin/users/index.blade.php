@@ -58,7 +58,7 @@
                                         <a href="{{ route('admin.users.destroy', $user->id) }}" onclick="event.preventDefault(); if(confirm('Are you sure?')) { document.getElementById('delete-form-{{ $user->id }}').submit(); }" class="menu-link px-3" data-kt-users-table-filter="delete_row">
                                             <button class="btn btn-sm delete-btn">Delete</button>
                                         </a>  
-                                        <form id="delete-form-{{ $workout->id }}" action="{{ route('admin.users.destroy', $workout->id) }}" method="POST" style="display: none;">
+                                        <form id="delete-form-{{ $user->id }}" action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>

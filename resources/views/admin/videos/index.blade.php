@@ -35,7 +35,7 @@
                                         <a class="link" href="{{ url('/') . $video->path }}" target="_blank">View Video</a>
                                     </td>
                                     <td>
-                                        <span class="badge badge-orange">{{ $video->workout->name }}</span>
+                                        <span class="badge badge-orange">{{ $video->workout->name }} Minutes</span>
                                     </td>
                                     <td>
                                         @foreach(json_decode($video->difficulty_level_ids) as $level_id)
