@@ -11,8 +11,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group mb-3">
-                                <label class="form-label">Name:</label>
-                                        <input type="text" class="form-control" placeholder="name here..." name="name" required />
+                                <label class="form-label">Title:</label>
+                                        <input type="text" class="form-control" placeholder="title here..." name="name" required />
                             </div>
                         </div>
                     </div>
