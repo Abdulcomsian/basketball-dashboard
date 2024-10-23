@@ -13,7 +13,7 @@ class SkillsController extends Controller
      */
     public function index()
     {
-        $skills = Skill::all();
+        $skills = Skill::latest()->get();
         return view('admin.skills.index', ['skills' => $skills]);
     }
 

@@ -13,7 +13,7 @@ class WorkoutsController extends Controller
      */
     public function index()
     {
-        $workouts = WorkoutLength::all();
+        $workouts = WorkoutLength::latest()->get();
         return view('admin.workouts.index', ['workouts' => $workouts]);
     }
 

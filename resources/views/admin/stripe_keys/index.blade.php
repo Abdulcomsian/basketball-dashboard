@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title', 'Level')
-@section('header', 'Levels')
+@section('title', 'Keys')
+@section('header', 'Keys')
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="container-fluid">
@@ -9,38 +9,45 @@
         <div class="container-fluid">
             <div class="mt-3">
                 <div class="d-flex mb-3">
-                    <a href="{{ route('admin.levels.create') }}">
+                    @if(empty($stripeKeys))
+                    <a href="{{ route('admin.stripekey.create') }}">
                         <button type="button" class="btn btn-sm me-3 add-section"><i class="fas fa-plus icon"></i>
                             Add New
                         </button>
                     </a>
+                    @endif
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover datatable datatable-Role cell-border">
                         <thead>
                             <tr class="text-start text-black-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="min-w-125px text-left">#</th>
-                                <th class="min-w-125px text-center">Title</th>
+                                <th class="min-w-125px text-center">#</th>
+                                <th class="min-w-125px text-center">Key</th>
+                                <th class="min-w-125px text-center">Secret</th>
                                 <th class="text-end min-w-100px text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($levels as $key => $level)
+                            @foreach ($stripeKeys as $key => $stripe)
                                 <tr>
-                                    <td class="text-left">{{ $key + 1 }}</td>
+                                    <td class="text-center">{{ $key + 1 }}</td>
                                     <td class="text-center">
-                                        {{$level->name}}
+                                        {{ $stripe->key }}
                                     </td>
 
                                     <td class="text-center">
-                                        <a href="{{ route('admin.levels.edit', $level->id) }}">
+                                        {{ $stripe->secret }}
+                                    </td>
+                                                                                                          
+                                    <td class="text-center">
+                                        <a href="{{ route('admin.stripekey.edit', $stripe->id) }}">
                                             <button class="btn btn-sm save-btn">Edit</button>
                                         </a>
-                                        <a href="{{ route('admin.levels.destroy', $level->id) }}" onclick="event.preventDefault(); if(confirm('Are you sure?')) { document.getElementById('delete-form-{{ $level->id }}').submit(); }" class="menu-link px-3" data-kt-users-table-filter="delete_row">
+                                        <a href="{{ route('admin.stripekey.destroy', $stripe->id) }}" onclick="event.preventDefault(); if(confirm('Are you sure?')) { document.getElementById('delete-form-{{ $stripe->id }}').submit(); }" class="menu-link px-3" data-kt-users-table-filter="delete_row">
                                             <button class="btn btn-sm delete-btn">Delete</button>
                                         </a>  
 
-                                        <form id="delete-form-{{ $level->id }}" action="{{ route('admin.levels.destroy', $level->id) }}" method="POST" style="display: none;">
+                                        <form id="delete-form-{{ $stripe->id }}" action="{{ route('admin.stripekey.destroy', $stripe->id) }}" method="POST" style="display: none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
@@ -115,7 +122,7 @@
                     {
                         orderable: false,
                         targets: '_all'
-                    } 
+                    }
                 ],
                 fixedColumns: {
                     leftColumns: 1,

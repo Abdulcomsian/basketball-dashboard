@@ -268,6 +268,27 @@
                                     <span class="menu-title">Videos</span>
                                 </a>
                             </div>
+
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/stripe*') ? 'active' : '' }}"
+                                    href="{{ route('admin.stripekey.index') }}">
+                                    <span class="menu-icon">
+                                        <i class="fas fa-credit-card"></i>
+                                    </span>
+                                    <span class="menu-title">Stripe Keys</span>
+                                </a>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/subscriptions*') ? 'active' : '' }}"
+                                    href="{{ route('admin.subscriptions.index') }}">
+                                    <span class="menu-icon">
+                                        <i class="fas fa-list-alt"></i>
+                                    </span>
+                                    <span class="menu-title">Subscriptions</span>
+                                </a>
+                            </div>
+                            
                         </div>
                         <!--end::Menu-->
                     </div>

@@ -45,4 +45,9 @@ class Video extends Model
             return $skillData;
         });
     }
+
+    public function videoWatchActivities()
+    {
+        return $this->hasMany(VideoWatchActivity::class);
+    }
 }

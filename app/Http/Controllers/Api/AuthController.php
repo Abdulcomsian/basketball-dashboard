@@ -81,21 +81,6 @@ class AuthController extends Controller
         }
     }
 
-    public function getUser()
-    {
-        try {
-            $user = Auth::user();
-
-            return response()->json([
-                'status' => 200,
-                'message' => 'success',
-                'data' => $user
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage() . ' on line ' . $e->getLine() . ' in file ' . $e->getFile()], 500);
-        }
-    }
-
     public function logout(Request $request)
     {
         try {

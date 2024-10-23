@@ -5,10 +5,6 @@ use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Admin\WorkoutsController;
-use App\Http\Controllers\Admin\LevelsController;
-use App\Http\Controllers\Admin\SkillsController;
-use App\Http\Controllers\Admin\UploadVideoController;
 
 Route::redirect('/', '/login');
 Route::get('/home', function () {
@@ -41,6 +37,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('levels', 'LevelsController');
     Route::resource('skills', 'SkillsController');
     Route::resource('videos', 'UploadVideoController');
+    Route::resource('stripekey', 'StripeKeysController');
+    Route::resource('subscriptions', 'SubscriptionsController');
 
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

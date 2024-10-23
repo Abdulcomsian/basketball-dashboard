@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use App\Http\Resources\VideoResource;
-use App\Http\Resources\SingleVideoResource;
 
 class VideoService
 {

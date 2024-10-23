@@ -17,7 +17,7 @@ class UploadVideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::with('workout')->get();
+        $videos = Video::with('workout')->latest()->get();
         return view('admin.videos.index', ['videos' => $videos]);
     }
 

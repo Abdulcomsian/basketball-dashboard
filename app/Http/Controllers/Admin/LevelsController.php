@@ -13,7 +13,7 @@ class LevelsController extends Controller
      */
     public function index()
     {
-        $levels = DifficultyLevel::all();
+        $levels = DifficultyLevel::latest()->get();
         return view('admin.levels.index', ['levels' => $levels]);
     }
 

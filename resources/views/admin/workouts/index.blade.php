@@ -103,7 +103,7 @@
                 autoWidth: false,
                 orderCellsTop: true,
                 order: [
-                    [1, 'desc']
+                    [0, 'asc']
                 ],
                 pageLength: 10,
                 responsive: true,

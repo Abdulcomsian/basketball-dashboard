@@ -4,20 +4,20 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use DateTimeInterface;
-use Hash;
-use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use App\Traits\Loggable;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens; // Import the HasApiTokens trait
 
 class User extends Authenticatable
 {
 
-    use SoftDeletes, Notifiable, HasFactory, Loggable,HasApiTokens;
+    use SoftDeletes, Notifiable, HasFactory, Loggable, HasApiTokens;
 
     public $table = 'users';
 
@@ -82,19 +82,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function otp()
+    // public function otp()
+    // {
+    //     return $this->belongsTo(PasswordResetOtp::class , 'username' , 'username');
+    // }
+
+    public function videoWatchActivities()
     {
-     
-        return $this->belongsTo(PasswordResetOtp::class , 'username' , 'username');
-
+        return $this->hasMany(VideoWatchActivity::class);
     }
-
-    public function warehouse()
-    {
-
-        return $this->belongsTo(Warehouse::class);
-
-    }
-
-    
 }

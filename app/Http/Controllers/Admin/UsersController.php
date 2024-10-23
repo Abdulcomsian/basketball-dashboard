@@ -20,7 +20,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $data = User::where('id', '!=', 1)->with(['roles'])->get();
+        $data = User::where('id', '!=', 1)->with(['roles'])->latest()->get();
 
         return view('admin.users.index', compact('data'));
     }
